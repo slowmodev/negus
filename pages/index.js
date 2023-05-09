@@ -1,11 +1,22 @@
 import Head from 'next/head'
+// import { Inter } from 'next/font/google'
+import Link from 'next/link'
+import { useState } from 'react'
 import Image from 'next/image'
-import { Inter } from 'next/font/google'
-import styles from '@/styles/Home.module.css'
+import sterlingLogo from '../images/sterlingLogo.png'
 
-const inter = Inter({ subsets: ['latin'] })
+// const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleEmail = (event) => {
+    setEmail(event.target.value);
+  };
+  const handlePass = (event) => {
+    setPassword(event.target.value);
+  };
   return (
     <>
       <Head>
@@ -14,108 +25,42 @@ export default function Home() {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className={styles.main}>
-        <div className={styles.description}>
-          <p>
-            Get started by editing&nbsp;
-            <code className={styles.code}>pages/index.js</code>
-          </p>
-          <div>
-            <a
-              href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              By{' '}
-              <Image
-                src="/vercel.svg"
-                alt="Vercel Logo"
-                className={styles.vercelLogo}
-                width={100}
-                height={24}
-                priority
-              />
-            </a>
-          </div>
-        </div>
-
-        <div className={styles.center}>
-          <Image
-            className={styles.logo}
-            src="/next.svg"
-            alt="Next.js Logo"
-            width={180}
-            height={37}
-            priority
-          />
-          <div className={styles.thirteen}>
-            <Image
-              src="/thirteen.svg"
-              alt="13"
-              width={40}
-              height={31}
-              priority
-            />
-          </div>
-        </div>
-
-        <div className={styles.grid}>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Docs <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Find in-depth information about Next.js features and&nbsp;API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Learn <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Learn about Next.js in an interactive course with&nbsp;quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Templates <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Discover and deploy boilerplate example Next.js&nbsp;projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <h2 className={inter.className}>
-              Deploy <span>-&gt;</span>
-            </h2>
-            <p className={inter.className}>
-              Instantly deploy your Next.js site to a shareable URL
-              with&nbsp;Vercel.
-            </p>
-          </a>
+      <main className='flex h-screen justify-center items-center relative bg-container'>
+        <div className='absolute top-0 left-0 p-2 text-bold text-xl text-white w-[60px]'><Image src={sterlingLogo} alt='sterling logo'/></div>
+        <div className='bg-white flex flex-col w-full mx-2 items-center justify-center font-sans font-semibold container border rounded-2xl py-4 drop-shadow-2xl max-w-[400px]'>
+          <h1 className='text-2xl mt-4 mb-6 text-blue-950'>Login</h1>
+          <form className='flex flex-col w-full p-3'>
+          <div className='mt-2 mb-4 relative'>
+              <input 
+              type="text" 
+              id="email"
+              value={email}
+              onChange={handleEmail} className="w-full border border-gray-500 focus:border-red-600 text-gray-500 bg-transparent py-2 pl-1.5 outline-none rounded-lg py-2 my-1 px-2"/>
+              <label className={`${
+                email ? '-top-5 left-1 text-sm text-red-500' : 'text-gray-500 top-3 left-1.5'
+                } absolute left-3 transition-all duration-200 `}
+                htmlFor="exampleFormControlInput1">
+                  Email
+              </label>
+            </div>
+            <div className='my-2 relative'>
+              
+              <input 
+              type="password" 
+              id="password"
+              value={password}
+              onChange={handlePass} className="w-full border border-gray-500 text-gray-500 focus:border-red-600 bg-transparent py-2 pl-1.5 outline-none rounded-lg py-2 my-1 px-2"/>
+              <label className={`${
+                password ? '-top-5 left-1 text-sm text-red-500' : 'text-gray-500 top-3 left-1.5'
+                } absolute left-3 transition-all duration-200 `}
+                htmlFor="exampleFormControlInput1">
+                  Password
+              </label>
+            </div>
+            <Link href='/navigate'>
+              <button className='w-full bg-red-600 hover:bg-red-800 text-white rounded-md p-3 my-4'>login</button>
+            </Link>
+          </form>
         </div>
       </main>
     </>
